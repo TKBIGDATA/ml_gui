@@ -55,7 +55,7 @@
      <string>Browse</string>
     </property>
    </widget>
-   <widget class="QListWidget" name="column_kist">
+   <widget class="QListWidget" name="column_list">
     <property name="geometry">
      <rect>
       <x>50</x>
