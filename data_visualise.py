@@ -42,7 +42,7 @@ class data_:
 	def fillna(self,df,column):
 
 		
-		df[column].fillna("Uknown",inplace=True)
+		df[column].fillna(0,inplace=True)
 		return df[column]
 
 	def fillmean(self,df,column):
