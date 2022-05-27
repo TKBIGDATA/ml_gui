@@ -60,7 +60,7 @@
      <rect>
       <x>50</x>
       <y>80</y>
-      <width>256</width>
+      <width>281</width>
       <height>211</height>
      </rect>
     </property>
@@ -68,7 +68,7 @@
    <widget class="QLabel" name="label_29">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>360</x>
       <y>150</y>
       <width>91</width>
       <height>31</height>
@@ -86,9 +86,9 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>500</x>
+      <x>460</x>
       <y>40</y>
-      <width>91</width>
+      <width>151</width>
       <height>31</height>
      </rect>
     </property>
@@ -98,13 +98,13 @@
      </font>
     </property>
     <property name="text">
-     <string>Data Detail</string>
+     <string>Data Detail Shape :</string>
     </property>
    </widget>
    <widget class="QLabel" name="shape">
     <property name="geometry">
      <rect>
-      <x>600</x>
+      <x>630</x>
       <y>40</y>
       <width>91</width>
       <height>31</height>
@@ -116,7 +116,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Shape :</string>
+     <string/>
     </property>
    </widget>
    <widget class="QComboBox" name="scaler">
@@ -175,6 +175,55 @@
       <width>561</width>
       <height>201</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>320</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Select Target Column</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Submit">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>320</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="target_col">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>200</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
