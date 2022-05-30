@@ -4,12 +4,14 @@ from PyQt5 import uic, QtWidgets ,QtCore, QtGui
 from data_visualise import data_
 from table_display import DataFrameModel
 from add_steps import add_steps
+# from linear_rg import print_success
+import linear_rg
 
 class UI(QMainWindow):
     def __init__(self):
         super(UI, self).__init__()
         uic.loadUi('mainwindow.ui', self)
-
+        print(self)
         global data, steps
         data = data_()
         steps = add_steps()
@@ -28,7 +30,21 @@ class UI(QMainWindow):
         self.empty_column = self.findChild(QComboBox , "empty_column")
         self.fillmean = self.findChild(QPushButton , "fillmean")
         self.fillna = self.findChild(QPushButton , "fillna")
+        self.scale_btn = self.findChild(QPushButton , "scale_btn")
 
+        self.scatter_x = self.findChild(QComboBox , "scatter_x")
+        self.scatter_y = self.findChild(QComboBox , "scatter_y")
+        self.scatter_c = self.findChild(QComboBox , "scatter_c")
+        self.scatter_marker = self.findChild(QComboBox , "scatter_mark")
+        self.scatterplot_btn = self.findChild(QPushButton , "scatterplot")
+    
+        self.plot_x = self.findChild(QComboBox, "plot_x")
+        self.plot_y = self.findChild(QComboBox, "plot_y")
+        self.plot_btn = self.findChild(QPushButton, "plot")
+        self.colour_2 = self.findChild(QComboBox, "plot_c")
+        self.marker_2 = self.findChild(QComboBox, "plot_mark")
+
+        self.train_btn = self.findChild(QPushButton , "train")
 
         self.Browse.clicked.connect(self.getCSV)
         self.columns.clicked.connect(self.target)
@@ -37,7 +53,46 @@ class UI(QMainWindow):
         self.drop_btn.clicked.connect(self.dropc)
         self.fillmean.clicked.connect(self.fillme)
         self.fillna.clicked.connect(self.fill_na)
+        self.scale_btn.clicked.connect(self.scale_value)
+
+        self.scatterplot_btn.clicked.connect(self.scatter_plot)
+        self.plot_btn.clicked.connect(self.line_plot)
+
+        self.train_btn.clicked.connect(self.train_func)
     
+    def train_func(self):
+        myDict={"Linear Regression" :linear_rg, }
+
+        if self.target_value !="":
+            self.win=myDict[self.model_select.currentText()].UI(self.df , self.target_value, steps)
+
+    def line_plot(self) :
+        x=self.plot_x.currentText()
+        y=self.plot_y.currentText()
+
+        c=self.colour_2.currentText()
+        marker= self.marker_2.currentText()
+        data.scatter_plot(df=self.df,x=x,y=y,c=c,marker=marker )
+
+    def scatter_plot(self):
+        x=self.scatter_x.currentText()
+        y=self.scatter_y.currentText()
+        c=self.scatter_c.currentText()
+        marker= self.scatter_marker.currentText()
+        data.scatter_plot(df=self.df,x=x,y=y,c=c,marker=marker )
+
+    def scale_value(self):
+        if self.scaler.currentText() == 'StandardScale':
+            self.df, func_name =  data.StandardScale(self.df, self.target_value)
+        elif self.scaler.currentText() == 'MinMaxScal':
+            self.df, func_name =  data.MinMaxScale(self.df, self.target_value)
+        else:
+            self.df, func_name =  data.PowerScale(self.df, self.target_value)
+
+        steps.add_text(self.scaler.currentText()+" applied to data")
+        steps.add_pipeline(self.scaler.currentText(),func_name)
+        self.filldetails()
+
     def fillme(self):
         selected = self.df[self.empty_column.currentText()]
         type = self.df[self.empty_column.currentText()].dtype
@@ -80,7 +135,17 @@ class UI(QMainWindow):
         self.dropcolumn.addItems(self.column_list)
         self.empty_column.clear()
         self.empty_column.addItems(self.column_list)
+
+        self.scatter_x.clear()
+        self.scatter_x.addItems(self.column_list)
+        self.scatter_y.clear()
+        self.scatter_y.addItems(self.column_list)
     
+        self.plot_x.clear()
+        self.plot_x.addItems(self.column_list)
+        self.plot_y.clear()
+        self.plot_y.addItems(self.column_list)
+
         x = DataFrameModel(self.df)
         self.table.setModel(x)
         
@@ -126,4 +191,4 @@ if __name__ == "__main__":
     window = UI()
     window.show()
 
-    sys.exit(app.exec_())
+    app.exec_()
