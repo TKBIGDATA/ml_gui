@@ -46,6 +46,7 @@ class UI(QMainWindow):
 
         self.train_btn = self.findChild(QPushButton , "train")
 
+
         self.Browse.clicked.connect(self.getCSV)
         self.columns.clicked.connect(self.target)
         self.submit_btn.clicked.connect(self.set_target)
