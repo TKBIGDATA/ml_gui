@@ -26,7 +26,8 @@ class UI(QMainWindow):
         self.X,self.n_classes,self.target_value,self.df,self.column_list=steps.return_data()
         self.target = self.findChild(QLabel,"target")
         self.columns= self.findChild(QListWidget,"columns")
-        self.test_size= self.findChild(QLabel,"test_size") 
+        self.test_size= self.findChild(QLabel,"test_size")
+        self.test = self.findChild(QPushButton , "test") 
         self.model=pickle_model       
         
 
@@ -72,5 +73,5 @@ class UI(QMainWindow):
         self.mae.setText(str(metrics.mean_absolute_error(self.X[self.target_value],self.pre)))
         self.mse.setText(str(metrics.mean_squared_error(self.X[self.target_value],self.pre)))
         self.rmse.setText(str(np.sqrt(metrics.mean_squared_error(self.X[self.target_value],self.pre))))
-        self.accuracy.setText(str(metrics.accuracy_score(self.X[self.target_value],self.pre)))
+        # self.accuracy.setText(str(metrics.accuracy_score(self.X[self.target_value],self.pre)))
     

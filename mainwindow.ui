@@ -945,6 +945,16 @@
       <string>Linear Regression</string>
      </property>
     </item>
+    <item>
+     <property name="text">
+      <string>KNN</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Logistic Regression</string>
+     </property>
+    </item>
    </widget>
    <widget class="QPushButton" name="train">
     <property name="geometry">

@@ -5,7 +5,7 @@ from data_visualise import data_
 from table_display import DataFrameModel
 from add_steps import add_steps
 # from linear_rg import print_success
-import linear_rg , pre_trained
+import linear_rg , pre_trained , logistic_reg , KNN
 
 class UI(QMainWindow):
     def __init__(self):
@@ -75,7 +75,7 @@ class UI(QMainWindow):
         self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
 
     def train_func(self):
-        myDict={"Linear Regression" :linear_rg, }
+        myDict={"Linear Regression" :linear_rg, "Logistic Regression":logistic_reg, "KNN":KNN}
 
         if self.target_value !="":
             self.win=myDict[self.model_select.currentText()].UI(self.df , self.target_value, steps)
