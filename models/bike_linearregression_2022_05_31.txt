@@ -1,0 +1,6 @@
+
+Column datetime dropped
+Column registered dropped
+Column casual dropped
+Column atemp dropped
+Column workingday dropped

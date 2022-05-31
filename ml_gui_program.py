@@ -5,7 +5,7 @@ from data_visualise import data_
 from table_display import DataFrameModel
 from add_steps import add_steps
 # from linear_rg import print_success
-import linear_rg
+import linear_rg , pre_trained
 
 class UI(QMainWindow):
     def __init__(self):
@@ -45,6 +45,8 @@ class UI(QMainWindow):
         self.marker_2 = self.findChild(QComboBox, "plot_mark")
 
         self.train_btn = self.findChild(QPushButton , "train")
+        self.pre_trained = self.findChild(QPushButton , "pre_trained")
+        self.go_pre_trained = self.findChild(QPushButton , "go_pre_trained")
 
 
         self.Browse.clicked.connect(self.getCSV)
@@ -60,7 +62,18 @@ class UI(QMainWindow):
         self.plot_btn.clicked.connect(self.line_plot)
 
         self.train_btn.clicked.connect(self.train_func)
+        self.pre_trained.clicked.connect(self.upload_model)
+        self.go_pre_trained.clicked.connect(self.test_pretrained)
     
+    def upload_model(self):
+        self.filePath_pre, _ = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file', 'C:/apps/ml_gui/models/',"pkl(*.pkl)")
+        with open(self.filePath_pre, 'rb') as file:
+            self.pickle_model = pickle.load(file)
+        
+    def test_pretrained(self):
+
+        self.testing=pre_trained.UI(self.df,self.target_value,self.pickle_model,self.filePath_pre)
+
     def train_func(self):
         myDict={"Linear Regression" :linear_rg, }
 
